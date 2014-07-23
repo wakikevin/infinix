@@ -140,8 +140,35 @@ twttr.ready(function (twttr) {
     // Now bind our custom intent events
 
     twttr.events.bind('tweet', function(intentEvent){
+			
+			//log results
+        console.log(intentEvent);
+        
+        //increase tweet count in database
+        if (intentEvent) {
+        		$.ajax({
+                url:BASE_URL+'/ajax.php',
+                type:'post',
+                data:{'task':'twitterShare'},
+                beforeSend:function(){
+                    console.log('Syncing share count');
+                }
+            }).success(function(response){
+                var data = JSON.parse(response);
+                if(data.code == '000'){
+                    $('#counter').empty().html(data.desc);
+                }else{
+                    console.error(data.desc);
+                }
+                console.log(response);
+            }).error(function(response){
+                console.error(response);
 
-        console.log(intentEvent)
+            })
+        	}else {
+        		console.error('Could not create tweet');
+        		}
+        
 
     });
 

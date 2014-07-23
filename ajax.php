@@ -1,4 +1,6 @@
 <?php
+	session_start();
+	
 	require "config.php";
 	require "includes/ORM.class.php";
     require "includes/validation.php";
@@ -35,6 +37,11 @@
         case "fbshare":
 
             shareFB();
+
+        break;
+        case "twitterShare":
+
+            twitterShare();
 
         break;
 
@@ -88,7 +95,8 @@
         $memory = isset($_POST['memory']) ? $_POST['memory'] : "";
         $city = isset($_POST['city']) ? $_POST['city'] : "";
         $postal = isset($_POST['postal']) ? $_POST['postal'] : "";
-
+		  $ordernumber = isset($_POST['code']) ? $_POST['code'] : "";
+		  
         //get validation class
         $validate = new Validation();
         $error = array();
@@ -104,7 +112,7 @@
                                     //save the data in the database
                                     $orderQuery = array('name'=>$name,'telephone'=>$telephone,
                                                         'email'=>$email,'color'=>$color,'memory'=>$memory,
-                                                        'city'=>$city,'postal'=>$postal);
+                                                        'city'=>$city,'postal'=>$postal,'ordernumber'=>$ordernumber);
 
                                     ORM::for_table('orders')->create($orderQuery)->save();
 
@@ -122,6 +130,7 @@
                                     $message = str_replace("{city}", $city, $message);
                                     $message = str_replace("{color}", $color, $message);
                                     $message = str_replace("{memory}", $memory, $message);
+                                    $message = str_replace("{ordernumber}", $ordernumber, $message);
 
                                     $message = str_replace(chr(194),"", $message);
 
@@ -217,7 +226,7 @@ function shareFB(){
 
     }else{
 
-        $newCount = intval($user->shareCount) - 1;
+        $newCount = intval($user->shareCount) + 1;
         // reduce count
         $user->shareCount = $newCount ;
 
@@ -225,7 +234,40 @@ function shareFB(){
         $user->save();
 
         $error['code'] = '000';
-        $error['desc'] = $newCount;
+        $error['desc'] = SHARE_COUNT - $newCount;
+
+    }
+    echo json_encode($error);
+       // echo $userid;
+}
+
+function twitterShare(){
+    //initialize db
+    initialize();
+
+    //get user id
+    $userid = isset($_SESSION['twitter_id']) ? $_SESSION['twitter_id'] : '';
+
+    //check if user exists
+    $user = ORM::for_table('twittershare')->where_like('twitter_id',$userid)->find_one();
+    $error = array();
+    if(!isset($user->twitter_id)){
+
+        $error['code'] = '001';
+        $error['desc'] = 'Could not find user';
+
+
+    }else{
+
+        $newCount = intval($user->shareCount) + 1;
+        // reduce count
+        $user->shareCount = $newCount ;
+
+        // Syncronise the object with the database
+        $user->save();
+
+        $error['code'] = '000';
+        $error['desc'] = SHARE_COUNT - $newCount;
 
     }
     echo json_encode($error);
@@ -249,7 +291,7 @@ function shareCount(){
 
     }else{
 
-        $newCount = intval($user->shareCount);
+        $newCount = SHARE_COUNT - intval($user->shareCount);
 
         $error['code'] = '000';
         $error['desc'] = $newCount;

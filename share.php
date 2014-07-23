@@ -1,9 +1,12 @@
 <?php
 
+//start session
+session_start();
 
 //include required files
 include('config.php');
 include('includes/ORM.class.php');
+require_once('twitteroauth/twitteroauth.php');
 
 ?>
 
@@ -63,7 +66,7 @@ include('includes/ORM.class.php');
                             if(data.code == '000'){
                                 $('#counter').empty().html(data.desc);
                             }else{
-                            	  $('#counter').empty().html('100');
+                            	  $('#counter').empty().html('<?php echo SHARE_COUNT; ?>');
                                 console.error(data.desc);
                             }
                             console.log(response);
@@ -74,7 +77,7 @@ include('includes/ORM.class.php');
 
 
                     }else {
-                    		$('#counter').empty().html('100');
+                    		$('#counter').empty().html('<?php echo SHARE_COUNT; ?>');
                     }
                 });
             };
@@ -170,9 +173,25 @@ include('includes/ORM.class.php');
                         <a href="javascript:shareOnFacebook();" class="fb-share" id="fb-share">
                           <img src="img/fb-share.png" alt="">
                         </a>
-                        <a href="https://twitter.com/intent/tweet?text=i love this &url=http://test.com" data-via="devgsoft" class="twitter-share">
-                          <img src="img/twitter-share.png" alt="">
-                        </a>
+                        <?php
+                        	/* If access tokens are not available redirect to connect page. */
+									if (empty($_SESSION['twitter_id']) || $_SESSION['twitter_id'] == 0 || empty($_SESSION['access_token']) || empty($_SESSION['access_token']['oauth_token']) || empty($_SESSION['access_token']['oauth_token_secret'])) {
+    							?>
+    								<a href="<?php echo BASE_URL; ?>/connect.php"  class="twitter-share">
+                         		 <img src="img/twitter-share.png" alt="">
+                        	</a>
+    							<?php
+									}else {
+										
+										//print_r($_SESSION);
+										
+								?>
+                        	<a href="https://twitter.com/intent/tweet?text=<?php echo TWITTER_TEXT ; ?>&url=<?php echo TWITTER_URL ; ?>" class="twitter-share">
+                          		<img src="img/twitter-share.png" alt="">
+                        	</a>
+                       <?php
+                       		}
+                       ?>
                       </div>
                     </div>
                   </div>
@@ -194,6 +213,7 @@ include('includes/ORM.class.php');
                 return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
 
             }(document, "script", "twitter-wjs"));
+            
         </script>
         <script src="js/vendor/jquery-1.9.1.min.js"></script>
         <script src="js/imagesloaded.js"></script>
