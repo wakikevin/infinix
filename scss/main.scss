@@ -1,0 +1,303 @@
+@import 'normalize', 'animate';
+
+*, *:before, *:after {
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box; 
+  box-sizing: border-box;
+  margin:0; padding:0;
+  outline:none;
+}
+:focus{
+  outline:none;
+}
+
+a:focus { 
+    outline: none; 
+}
+button:focus { 
+    outline: none; 
+}
+button::-moz-focus-inner {
+  border: 0;
+}
+.row:before, .row:after, .clearfix:before, .clearfix:after, .horz-list:after, .horz-list:before { content:""; display:table; }
+.row:after, .clearfix:after, .horz-list:after { clear: both; }
+.row, .clearfix, .horz-list { zoom: 1; }
+
+.ir {
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    *text-indent: -9999px;
+}
+
+.ir:before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 150%;
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden;
+}
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.inline-block{
+    display:inline-block;
+    *display:inline;
+    zoom:1;
+    vertical-align: top;
+}
+
+img::selection {
+  background: transparent;
+}
+
+img::-moz-selection {
+  background: transparent;
+}
+
+body {
+   -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+}
+@font-face {
+    font-family: 'interstate_mono_-_blkregular';
+    src: url('../fonts/interstate_mono_-_blk-webfont.eot');
+    src: url('../fonts/interstate_mono_-_blk-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/interstate_mono_-_blk-webfont.woff') format('woff'),
+         url('../fonts/interstate_mono_-_blk-webfont.ttf') format('truetype'),
+         url('../fonts/interstate_mono_-_blk-webfont.svg#interstate_mono_-_blkregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'interstate_mono_-_lgtregular';
+    src: url('../fonts/interstate_mono_-_lgt-webfont.eot');
+    src: url('../fonts/interstate_mono_-_lgt-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/interstate_mono_-_lgt-webfont.woff') format('woff'),
+         url('../fonts/interstate_mono_-_lgt-webfont.ttf') format('truetype'),
+         url('../fonts/interstate_mono_-_lgt-webfont.svg#interstate_mono_-_lgtregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'interstate_monobold';
+    src: url('../fonts/interstate_mono_bold-webfont.eot');
+    src: url('../fonts/interstate_mono_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/interstate_mono_bold-webfont.woff') format('woff'),
+         url('../fonts/interstate_mono_bold-webfont.ttf') format('truetype'),
+         url('../fonts/interstate_mono_bold-webfont.svg#interstate_monobold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+       -o-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin animaxn{
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+
+$white:#fff;
+$green:#9fcb45;
+$grey:#777475;
+$black:#231f20;
+$gutter:50px;
+$text-color:#888;
+
+$font-regular: 'interstate_mono_-_lgtregular', Helvetica, sans-serif;
+$font-bold: 'interstate_monobold', Helvetica, sans-serif;
+$font-extra-bold: 'interstate_mono_-_blkregular', Helvetica, sans-serif;
+
+
+img, a img{
+	vertical-align: top;
+  outline:none;
+  border:none;
+}
+body{
+	background:#f4f4f4;
+	margin: 0px; 
+	padding: 0px;
+}
+body, td, th, select, input a{ 
+	font-family: $font-regular; 
+	font-size: 14px;
+  line-height: 1.4;
+	color: #666;
+	-webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: #00F; text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:active { text-decoration: none; }
+
+html,
+button,
+input,
+select,
+textarea {
+    color: #222;
+}
+
+body {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+
+img {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Chrome Frame prompt
+   ========================================================================== */
+
+.chromeframe {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Parallax Scroll
+   ========================================================================== */
+body, html {
+  height: 100%;
+  min-height: 100%;
+  background-color: #000000;
+}
+ 
+.no-js {
+  padding-top: 106px;
+}
+
+/* Import Layout */
+/* ==================================================== */
+
+@import 'layout';
+
+
+/* Import Media Queries */
+/* ==================================================== */
+
+@import 'media-queries';
+
+
+
+
+/* Import Cross-browser Compaitibility Files */
+/* ==================================================== */
+
+@import 'ie7', 'ie8', 'ie9';
+
