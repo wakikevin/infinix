@@ -7,9 +7,9 @@ include('includes/ORM.class.php');
 
 //generate and save verification code
 //$code = strtoupper(md5(time()));
-$uniqid = uniqid();
-$rand_start = rand(1,5);
-$code = strtoupper(substr($uniqid,$rand_start,8));
+$codeNum = substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 10);
+$randNumber = rand(10, 99);
+$code = strtoupper($codeNum.'-'.$randNumber);
 
 //database connection
 ORM::configure(array(
@@ -22,7 +22,7 @@ ORM::configure(array(
 //1. fields to be inserted
 $codeQuery = array('code'=>$code);
 //2. set on class to save
-ORM::for_table('codeverify')->create($codeQuery)->save();
+ORM::for_table(DBPREFIX.'codeverify')->create($codeQuery)->save();
 
 ?>
 
@@ -56,7 +56,7 @@ ORM::for_table('codeverify')->create($codeQuery)->save();
          <div class="nav-container">
 		    <div class="mobile-menu">
 		        <ul>
-		          <li><a href="index.php">ABOUT</a></li>
+		          <li><a href="index.php">MEET INFINIX ZERO</a></li>
 		          <li><a href="pre-order.php" class="current">PRE-ORDER</a></li>
 		          <li><a href="share.php">SHARE</a></li>
 		        </ul>
@@ -76,7 +76,7 @@ ORM::for_table('codeverify')->create($codeQuery)->save();
    				<div class="menu">
    					<div class="vertical-align">
    						<ul>
-							<li><a href="index.php">ABOUT</a></li>
+							<li><a href="index.php">MEET INFINIX ZERO</a></li>
 							<li><a href="pre-order.php" class="current">PRE-ORDER</a></li>
 							<li><a href="share.php">SHARE</a></li>
 						</ul>
@@ -108,8 +108,8 @@ ORM::for_table('codeverify')->create($codeQuery)->save();
 	                          <div class="form-container">
 	                            <div id="notify" class="notify form-error" style="display:none;">Please enter a valid name</div>
 	                            <div class="notify loadin" style="display:none;">Sending...</div>
-	                            <div class="success" style="display:none;">Thank you for submitting your enquiry. <br>We will contact you as soon as possible.</div>
-	                            <form id="frm-pre-order" action="">
+	                            <div class="success" style="display:none;">Thank you for your Pre-order. <br/>We will inform you once the phone is ready.<br /> <br/> Continue sharing to lower the price.</div>
+	                            <form id="frm-pre-order" action="" style="display:block;">
 	                            	<div class="left-colgroup">
 	                            		<label for="">Name</label>
 	                            		<input type="text" id="name" name="name" />
@@ -129,11 +129,12 @@ ORM::for_table('codeverify')->create($codeQuery)->save();
 									    <label for="">Memory size</label>
 	                              		<div class="selectdiv" >
 								          <select class="selectboxdiv" name="memory" id="memory">
-								            <option value="8GB" selected="selected">8GB - N20,000</option>
-								            <option value="16GB">16GB - N25,000</option>
+								            <option value="8GB" selected="selected">8GB</option>
+								            <option value="16GB">16GB</option>
 								          </select>
 								          <div class="out">8G+1G RAM+ROM</div>
-									    </div>	
+									    </div>
+									
 	                            	</div>
 	                              	<div class="right-colgroup">
 	                              		
@@ -153,6 +154,7 @@ ORM::for_table('codeverify')->create($codeQuery)->save();
 									    	<div class="short-math" id="short-math">8 + 4 =</div>
 									    	<input type="text" id="robot" name="robot" />
 									    </div>
+										<label for="powerbank"><input type="checkbox" name="powerbank" value="yes" />&nbsp; Include a Power Bank now <br/><b>@ N 1,500</b> instead of <b>N4,000</b></label>
 	                              		<input type="button" id="btnPreoder" value="Pre-order" />
 	                              	</div>
 	                                <input id="code" name="code" value="<?php echo $code; ?>" type="hidden" />
@@ -165,7 +167,7 @@ ORM::for_table('codeverify')->create($codeQuery)->save();
 	                  </div>
 	                  <div class="preorder-notice">
 	                    <div class="notice">
-	                      The perfect balance between elegance and innovation. With the Infinix Zero, the possibilities are endless.
+	                      Only you and your friends can help lower the price of this amazing phone. Keep sharing our promo with your friends on Facebook and Twitter today and watch the price drop!
 	                    </div>
 	                  </div>
 	                </div>
@@ -179,7 +181,6 @@ ORM::for_table('codeverify')->create($codeQuery)->save();
 
 		</div>
 
-        <script src="js/vendor/jquery-1.9.1.min.js"></script>
         <script src="js/imagesloaded.js"></script>
         <script src="js/skrollr.js"></script>
         <script src="js/_main.js"></script>

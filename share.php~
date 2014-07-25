@@ -26,16 +26,14 @@ require_once('twitteroauth/twitteroauth.php');
         <script>
             var BASE_URL = '<?php echo BASE_URL; ?>';
         </script>
+        <script src="js/vendor/jquery-1.9.1.min.js"></script>
         <script src="js/vendor/modernizr-2.7.1.min.js"></script>
-
-
-
     </head>
     <body class="loading">
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-
+        
         <!-- Load Facebook SDK -->
         <script>
             window.fbAsyncInit = function() {
@@ -200,7 +198,7 @@ require_once('twitteroauth/twitteroauth.php');
           </div>
 
         </div>
-        <script>
+			 <script>
             window.twttr = (function (d, s, id) {
                 var t, js, fjs = d.getElementsByTagName(s)[0];
 
@@ -215,12 +213,12 @@ require_once('twitteroauth/twitteroauth.php');
             }(document, "script", "twitter-wjs"));
             
         </script>
-        <script src="js/vendor/jquery-1.9.1.min.js"></script>
+        </script>
+        
         <script src="js/imagesloaded.js"></script>
         <script src="js/skrollr.js"></script>
         <script src="js/_main.js"></script>
         <script src="js/allscript.js"></script>
-        <script src="js/share.js"></script>
-
+		  <script src="js/share.js"></script>			
     </body>
 </html>

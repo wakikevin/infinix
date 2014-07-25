@@ -26,14 +26,16 @@ require_once('twitteroauth/twitteroauth.php');
         <script>
             var BASE_URL = '<?php echo BASE_URL; ?>';
         </script>
-        <script src="js/vendor/jquery-1.9.1.min.js"></script>
         <script src="js/vendor/modernizr-2.7.1.min.js"></script>
+
+
+
     </head>
     <body class="loading">
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-        
+
         <!-- Load Facebook SDK -->
         <script>
             window.fbAsyncInit = function() {
@@ -43,7 +45,41 @@ require_once('twitteroauth/twitteroauth.php');
                     version    : 'v2.0'
                 });
 
-               
+                FB.getLoginStatus(function(response) {
+                    if (response.status === 'connected') {
+                        // the user is logged in and has authenticated your
+                        // app, and response.authResponse supplies
+                        // the user's ID, a valid access token, a signed
+                        // request, and the time the access token
+                        // and signed request each expire
+                        var uid = response.authResponse.userID;
+
+                        $.ajax({
+                            url:BASE_URL+'/ajax.php',
+                            type:'post',
+                            data:{'uid':uid,'task':'fbinit'},
+                            beforeSend:function(){
+                                console.log('get share count' + uid);
+                            }
+                        }).success(function(response){
+                            var data = JSON.parse(response);
+                            if(data.code == '000'){
+                                $('#counter').empty().html(data.desc);
+                            }else{
+                            	  $('#counter').empty().html('<?php echo SHARE_COUNT; ?>');
+                                console.error(data.desc);
+                            }
+                            console.log(response);
+                        }).error(function(response){
+                            console.error(response);
+
+                        })
+
+
+                    }else {
+                    		$('#counter').empty().html('<?php echo SHARE_COUNT; ?>');
+                    }
+                });
             };
 
             (function(d, s, id){
@@ -63,7 +99,7 @@ require_once('twitteroauth/twitteroauth.php');
       <div class="nav-container">
           <div class="mobile-menu">
               <ul>
-                <li><a href="index.php">MEET INFINIX ZERO</a></li>
+                <li><a href="index.php">ABOUT</a></li>
                 <li><a href="pre-order.php">PRE-ORDER</a></li>
                 <li><a href="share.php" class="current">SHARE</a></li>
               </ul>
@@ -82,7 +118,7 @@ require_once('twitteroauth/twitteroauth.php');
      				<div class="menu">
      					<div class="vertical-align">
      						<ul>
-  							<li><a href="index.php">MEET INFINIX ZERO</a></li>
+  							<li><a href="index.php">ABOUT</a></li>
   							<li><a href="pre-order.php">PRE-ORDER</a></li>
   							<li><a href="share.php" class="current">SHARE</a></li>
   						</ul>
@@ -93,22 +129,20 @@ require_once('twitteroauth/twitteroauth.php');
 
        		</div>
        	</div>
-       	 
-       	 
-       	 <div id="share-page">
+       	  <div id="share-page">
                 <div class="page-bg"></div>
                <div class="content-main">
                 <div class="wrap">
                   <div class="share-main">
                     <div class="vertical-align">
-                      <h1>KEEP SHARING TO LOWER THE PRICE <br/>OF THE INFINIX ZERO</h1>
+                      <h1>KEEP SHARING TO UNLOCK <br>THE INFINIX ZERO</h1>
                       <div class="share-block">
-                          <h4>IT NOW COSTS</h4>
+                          <h4>ONLY:</h4>
                           <h3 id="counter"></h3>
-                          <!--<h4>SHARES TO GO</h4>-->
+                          <h4>SHARES TO GO</h4>
                       </div>
                       <div class="intro-p">
-                        The Infinix Zero is here and we’re giving you the chance to pre-order. <br/>The price is all up to you.
+                        The Infinix Zero is here and we’re giving you the chance  to pre-order it at an unbelievable price.
                       </div>
                       <div class="steps-main">
                           <div class="single-step">
@@ -119,16 +153,16 @@ require_once('twitteroauth/twitteroauth.php');
                           </div>
 
                           <div class="single-step">
-                            <h4>Get your friends to <br/>share it too</h4>
+                            <h4>Drop the <br>countdown to ZERO</h4>
                             <p>
                               The more shares the the faster the drop
                             </p>
                           </div>
 
                           <div class="single-step">
-                            <h4>Get <br> pre-order</h4>
+                            <h4>Make your <br> pre-order</h4>
                             <p>
-                               Own the Infinix Zero at an incredible price
+                               Pre-order your very own Infinix Zero
                             </p>
                           </div>
                       </div>
@@ -162,9 +196,77 @@ require_once('twitteroauth/twitteroauth.php');
                 </div>
                </div>
           </div>
+       	 
+       	 <!-- <div id="share-page">
+                <div class="page-bg"></div>
+               <div class="content-main">
+                <div class="wrap">
+                  <div class="share-main">
+                    <div class="vertical-align">
+                      <h1>KEEP SHARING TO UNLOCK <br>THE INFINIX ZERO</h1>
+                      <div class="share-block">
+                          <h4>ONLY:</h4>
+                          <h3 id="counter"></h3>
+                          <h4>SHARES TO GO</h4>
+                      </div>
+                      <div class="intro-p">
+                        The Infinix Zero is here and we’re giving you the chance  to pre-order it at an unbelievable price.
+                      </div>
+                      <div class="steps-main">
+                          <div class="single-step">
+                            <h4>Share the <br> promo</h4>
+                            <p>
+                              Share this promo with your friends
+                            </p>
+                          </div>
+
+                          <div class="single-step">
+                            <h4>Drop the <br>countdown to ZERO</h4>
+                            <p>
+                              The more shares the the faster the drop
+                            </p>
+                          </div>
+
+                          <div class="single-step">
+                            <h4>Make your <br> pre-order</h4>
+                            <p>
+                               Pre-order your very own Infinix Zero
+                            </p>
+                          </div>
+                      </div>
+                      <div class="btn-main">
+                        <div id="fb-root"></div>
+                        <a href="javascript:shareOnFacebook();" class="fb-share" id="fb-share">
+                          <img src="img/fb-share.png" alt="">
+                        </a>
+                        <?php
+                        	/* If access tokens are not available redirect to connect page. */
+									if (empty($_SESSION['twitter_id']) || $_SESSION['twitter_id'] == 0 || empty($_SESSION['access_token']) || empty($_SESSION['access_token']['oauth_token']) || empty($_SESSION['access_token']['oauth_token_secret'])) {
+    							?>
+    								<a href="<?php echo BASE_URL; ?>/connect.php"  class="twitter-share">
+                         		 <img src="img/twitter-share.png" alt="">
+                        	</a>
+    							<?php
+									}else {
+										
+										//print_r($_SESSION);
+										
+								?>
+                        	<a href="https://twitter.com/intent/tweet?text=<?php echo TWITTER_TEXT ; ?>&url=<?php echo TWITTER_URL ; ?>" class="twitter-share">
+                          		<img src="img/twitter-share.png" alt="">
+                        	</a>
+                       <?php
+                       		}
+                       ?>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+               </div>
+          </div> -->
 
         </div>
-			 <script>
+        <script>
             window.twttr = (function (d, s, id) {
                 var t, js, fjs = d.getElementsByTagName(s)[0];
 
@@ -177,39 +279,14 @@ require_once('twitteroauth/twitteroauth.php');
                 return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
 
             }(document, "script", "twitter-wjs"));
-			
-			$(document).ready(function(){
-				
-				$.ajax({
-                            url:BASE_URL+'/ajax.php',
-                            type:'post',
-                            data:{'task':'fbinit'},
-                            beforeSend:function(){
-                                console.log('get share count');
-                            }
-                        }).success(function(response){
-                            var data = JSON.parse(response);
-                            if(data.code == '000'){
-                                $('#counter').empty().html('N'+ data.desc);
-                            }else{
-                            	$('#counter').empty().html('N<?php echo SHARE_COUNT; ?>');
-                                console.error(data.desc);
-                            }
-                            console.log(response);
-                        }).error(function(response){
-							$('#counter').empty().html('N<?php echo SHARE_COUNT; ?>');
-                            console.error(response);
-
-                        })
-			});
             
         </script>
-        </script>
-        
+        <script src="js/vendor/jquery-1.9.1.min.js"></script>
         <script src="js/imagesloaded.js"></script>
         <script src="js/skrollr.js"></script>
         <script src="js/_main.js"></script>
         <script src="js/allscript.js"></script>
-		  <script src="js/share.js"></script>			
+        <script src="js/share.js"></script>
+
     </body>
 </html>

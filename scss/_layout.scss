@@ -53,7 +53,7 @@ main {
 }
 .infinix-logo{
 	float: left;
-	padding-top: 12px;
+	padding-top: 10px;
 	width:140px;
 	img{
 		width:100%;
@@ -159,6 +159,12 @@ main {
 	margin-left: -450px;
 }
 
+/* Slide 6 */
+#slide-7 .bcg {background-image:url('../img/bcg_slide-7.jpg')}
+#slide-7 .hsContent {
+	margin-left: -450px;
+}
+
 
 .content-main{
 	position:relative;
@@ -186,6 +192,7 @@ main {
 		top:0;
 		height: 100%;
 		display:table;
+		display:inline\0;/* ie8, ie9, ie10, ie11 only */ 
 	}
 }
 
@@ -280,7 +287,7 @@ main {
 	}
 }
 
-#slide-2, #slide-3, #slide-4, #slide-5, #slide-6{
+#slide-2, #slide-3, #slide-4, #slide-5, #slide-6, #slide-7{
 	.brand-logo{
 		padding: 20px 0;
 		h2{
@@ -321,6 +328,18 @@ main {
 }
 
 #slide-5{
+	.brand-logo{
+		border-color:#aaacac;
+		h2{
+			color:#231f20;
+		}
+	}
+	.slider1-intro p{
+		color:#231f20;
+	}
+}
+
+#slide-7{
 	.brand-logo{
 		border-color:#aaacac;
 		h2{
@@ -529,10 +548,9 @@ main {
 	background-size: cover;
 	height: 100%;
 	width: 100%;
-	position:fixed;
+	position: fixed;
 	top:0;
 	left:0;
-	z-index: -1;
 }
 .share-main{
 	display:table;
@@ -776,3 +794,48 @@ body.nav-open, html.nav-open{
         display:none;
     }
 }
+
+#slide-1{
+    .bcg{
+        background-color: #060606;
+    }
+}
+#slide-2{
+	.slider1-phoneimg{
+		padding-top: 270px;
+	}
+    .bcg{
+       background-color: #aeafb1;
+    }
+}
+
+#slide-3{
+    .bcg{
+       background-color: #aeafb0;
+    }
+}
+
+#slide-4{
+    .bcg{
+       background-color: #060606;
+    }
+}
+#slide-5{
+    .bcg{
+       background-color: #fff;
+    }
+}
+#slide-6{
+    .bcg{
+       background-color: #aeafb0;
+    }
+}
+#slide-7{
+	.slider1-phoneimg img{
+		display:none;
+	}
+    .bcg{
+       background-color: #fff;
+    }
+}
+

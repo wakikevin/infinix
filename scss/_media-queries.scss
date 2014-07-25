@@ -190,7 +190,7 @@
             width: 80%;
         }
     }
-    #slide-2 .brand-logo h2, #slide-3 .brand-logo h2, #slide-4 .brand-logo h2, #slide-5 .brand-logo h2, #slide-6 .brand-logo h2{
+    #slide-2 .brand-logo h2, #slide-3 .brand-logo h2, #slide-4 .brand-logo h2, #slide-5 .brand-logo h2, #slide-6 .brand-logo h2, #slide-7 .brand-logo h2{
         width: 100%;
         font-size: 30px;
     }
@@ -313,6 +313,9 @@
             display:none;
         }
    }
+   .page-bg{
+    position:absolute;
+   }
 
 }//Max width 768
 
@@ -320,7 +323,13 @@
     // .main-header{
     //     background:purple;
     // }
+    #slide-7 .slider1-phoneimg img {
+       display: block;
+    }
     #slide-1{
+        .content-main {
+          margin-top: 60px;
+        }
         .bcg{
             background-image: url("../img/mobile-slider1.jpg");
         }
@@ -340,7 +349,7 @@
     }
     #slide-2{
         .content-main {
-          margin-top: 60px;
+          margin-top: 0px;
         }
         .bcg{
             background-image: url("../img/mobile-slider2.jpg");
@@ -369,8 +378,12 @@
         }
     }
     #slide-3{
+        .content-main {
+          margin-top: 0px;
+        }
         .bcg{
             background-image: url("../img/mobile-slider3.jpg");
+            background-color: #fff;
         }
         .slider1-phoneimg{
             text-align:left;
@@ -403,8 +416,12 @@
     }
 
     #slide-4{
+        .content-main {
+          margin-top: 0px;
+        }
         .bcg{
             background-image: url("../img/mobile-slider4.jpg");
+            background-color: #aeafb0;
         }
         .slider1-phoneimg{
             text-align:left;
@@ -431,6 +448,9 @@
     }
 
      #slide-5{
+        .content-main {
+          margin-top: 0px;
+        }
         .bcg{
             background:#fff;
         }
@@ -459,6 +479,9 @@
     }
 
     #slide-6{
+        .content-main {
+          margin-top: 0px;
+        }
         .bcg{
             background-image: url("../img/mobile-slider6.png");
         }
@@ -489,6 +512,39 @@
         }
     }
 
+    #slide-7{
+        .content-main {
+          margin-top: 0px;
+        }
+        .bcg{
+            background:#fff;
+        }
+        .slider1-phoneimg{
+            text-align:left;
+            img{
+               width: 90%;
+            }
+        }
+        .slider1-intro{
+            p{
+                 color: #231f20;
+            }
+        }
+        .brand-logo{
+            text-align:left;
+            margin-top:0;
+            border-bottom: #A2A2A2 solid 1px;
+            h2{
+                color: #231f20;
+            }
+            img{
+               width: 80%;
+            }
+        }
+    }
+
+
+    
     .content-main{
         margin-top: 90px;
         .right-wing {
@@ -548,6 +604,9 @@
     #slide-4 .slider1-phoneimg img, #slide-3 .slider1-phoneimg img {
        display: block;
     }
+    #slide-2 .slider1-phoneimg {
+        padding-top: 0;
+    }
 }//Max width 500
 
 @media only screen and (max-width:330px){
@@ -581,38 +640,7 @@
     #pre-order .wrap {
        margin: 10px auto 0;
     }
-    #slide-1{
-        .bcg{
-            background-color: #333;
-        }
-    }
-    #slide-2{
-        .bcg{
-           background-color: #aeafb1;
-        }
-    }
 
-    #slide-3{
-        .bcg{
-           background-color: #fff;
-        }
-    }
-
-    #slide-4{
-        .bcg{
-           background-color: #fff;
-        }
-    }
-    #slide-5{
-        .bcg{
-           background-color: #ccc;
-        }
-    }
-    #slide-6{
-        .bcg{
-           background-color: #fff;
-        }
-    }
     
 }//Max width 500
 

@@ -51,7 +51,7 @@ if (200 == $connection->http_code) {
 	/* If method is set change API call made. Test is called by default. */
 	$content = $connection->get('account/verify_credentials');
  	//get code in database for comparison
-  	$user = ORM::for_table('twittershare')->where_like('twitter_id',$content->id)->find_one();
+  	$user = ORM::for_table(DBPREFIX.'twittershare')->where_like('twitter_id',$content->id)->find_one();
 
   	if(isset($user->twitter_id)){
      
@@ -61,7 +61,7 @@ if (200 == $connection->http_code) {
       $twitterUser = array("screen_name"=>$content->screen_name,"twitter_id"=>$content->id);
 	
 		//create user in database
-		$saved = ORM::for_table('twittershare')->create($twitterUser)->save();
+		$saved = ORM::for_table(DBPREFIX.'twittershare')->create($twitterUser)->save();
 		
 		if($saved) {
 			

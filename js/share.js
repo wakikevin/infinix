@@ -98,8 +98,10 @@ function fbShare(uid){
 
     FB.ui({
         method: 'feed',
-        link: 'https://developers.facebook.com/docs/',
-        caption: 'An example caption'
+        link: BASE_URL,
+        caption: 'The Infinix Zero is here',
+		picture:BASE_URL+'/img/facebook-pic.png',
+		description:'I’ve just helped bring down the price of the new Infinix Zero smartphone. The more shares the lower the price. Pre-order yours today!'
     }, function(response){
 
         if(response){
@@ -115,7 +117,7 @@ function fbShare(uid){
             }).success(function(response){
                 var data = JSON.parse(response);
                 if(data.code == '000'){
-                    $('#counter').empty().html(data.desc);
+                    $('#counter').empty().html('N'+ data.desc);
                 }else{
                     console.error(data.desc);
                 }
@@ -156,7 +158,7 @@ twttr.ready(function (twttr) {
             }).success(function(response){
                 var data = JSON.parse(response);
                 if(data.code == '000'){
-                    $('#counter').empty().html(data.desc);
+                    $('#counter').empty().html('N'+data.desc);
                 }else{
                     console.error(data.desc);
                 }
